@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Para Mi Personita Especial 💛✨</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Dancing+Script:wght@600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        darkbg: '#0a0812',
+                        darkcard: 'rgba(20, 16, 32, 0.8)',
+                        gold: {
+                            300: '#fde047',
+                            400: '#facc15',
+                            500: '#eab308',
+                        },
+                        romantic: {
+                            400: '#fb7185',
+                            500: '#f43f5e',
+                            600: '#e11d48',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                        handwriting: ['Caveat', 'cursive'],
+                        script: ['Dancing Script', 'cursive'],
+                        code: ['Fira Code', 'monospace'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        .hidden { display: none !important; }
+        .block { display: block !important; }
+
+        body {
+            background-color: #06040a;
+            background: radial-gradient(circle at top center, #1b1128 0%, #06040a 100%);
+            color: #f3f4f6;
+            min-height: 100vh;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            overflow-x: hidden;
+            margin: 0;
+            padding: 0;
+        }
+
+        .glass-panel {
+            background: rgba(18, 14, 28, 0.85);
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            box-shadow: 0 10px 35px 0 rgba(0, 0, 0, 0.6);
+        }
+
+        .glass-button {
+            background: rgba(255, 255, 255, 0.07);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .glass-button:hover, .glass-button.active {
+            background: linear-gradient(135deg, rgba(250, 204, 21, 0.28) 0%, rgba(244, 63, 94, 0.28) 100%);
+            border-color: rgba(250, 204, 21, 0.7);
+            box-shadow: 0 0 25px rgba(250, 204, 21, 0.35);
+        }
+
+        /* REGLA CRÍTICA: Fuerza el cuadro de destellos SIEMPRE al fondo */
+        .bottom-counter {
+            position: absolute !important;
+            bottom: 16px !important;
+            left: 50% !important;
+            transform: translateX(-50%) !important;
+            z-index: 20 !important;
+            white-space: nowrap !important;
+        }
+
+        @keyframes floatSlow {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .animate-float {
+            animation: floatSlow 4s ease-in-out infinite;
+        }
+
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #06040a; }
+        ::-webkit-scrollbar-thumb { background: #374151; border-radius: 3px; }
+    </style>
+</head>
+<body class="relative min-h-screen pb-8 selection:bg-amber-500/30 selection:text-amber-200">
+
+    <!-- 1. INTRO OVERLAY -->
+    <div id="introOverlay" class="fixed inset-0 z-50 bg-slate-950/95 backdrop-blur-2xl flex flex-col items-center justify-center p-6 text-center transition-all duration-700">
+        <div class="absolute w-72 h-72 bg-amber-500/20 rounded-full blur-3xl pointer-events-none"></div>
+
+        <div class="relative z-10 max-w-md w-full glass-panel p-8 sm:p-10 rounded-3xl border border-amber-500/30 shadow-2xl flex flex-col items-center">
+            <div class="w-24 h-24 bg-gradient-to-tr from-amber-400 via-amber-500 to-rose-500 rounded-full flex items-center justify-center text-5xl shadow-xl shadow-amber-500/30 mb-6 animate-float">
+                🌻
+            </div>
+
+            <h1 class="font-handwriting text-4xl sm:text-5xl font-bold text-amber-300 tracking-wide mb-2 drop-shadow-md">
+                ♥MI NIÑA ♥
+            </h1>
+            
+            <p class="text-slate-200 text-lg sm:text-xl font-medium mb-8">
+                Tengo un regalo para ti 🎁
+            </p>
+
+            <button onclick="startExperience()" class="w-full py-4 px-8 rounded-full bg-gradient-to-r from-amber-400 via-amber-500 to-rose-500 hover:from-amber-300 hover:to-rose-400 text-slate-950 font-extrabold text-lg shadow-xl shadow-amber-500/30 transform hover:scale-105 active:scale-95 transition-all flex items-center justify-center gap-3">
+                <span>Click para ver tu regalo ♥</span>
+                <i class="fa-solid fa-sparkles text-amber-950"></i>
+            </button>
+
+            <p class="text-xs text-slate-500 mt-6 font-code">
+                // Desde Ingeniería de Sistemas hasta Educación Primaria...
+            </p>
+        </div>
+    </div>
+
+    <!-- 2. NAVIGATION BAR -->
+    <header class="sticky top-0 z-40 w-full px-4 pt-4 pb-3 backdrop-blur-md bg-slate-950/80 border-b border-white/10">
+        <div class="max-w-3xl mx-auto flex items-center justify-between gap-2">
+            <div class="flex items-center gap-2">
+                <span class="text-amber-400 text-xl sm:text-2xl">🌻</span>
+                <span class="font-handwriting text-xl sm:text-2xl font-bold text-amber-300 hidden sm:inline">Sistemas & Educación</span>
+            </div>
+
+            <nav class="flex items-center justify-center gap-2 w-full sm:w-auto bg-slate-900/90 p-1.5 rounded-full border border-white/10 shadow-lg">
+                <button onclick="switchTab('flor')" id="tab-flor" class="tab-btn glass-button active flex-1 sm:flex-initial px-5 sm:px-6 py-2.5 rounded-full text-xs sm:text-sm font-bold flex items-center justify-center gap-2 text-amber-300">
+                    <span>🌻</span>
+                    <span>Girasoles</span>
+                </button>
+
+                <button onclick="switchTab('carta')" id="tab-carta" class="tab-btn glass-button flex-1 sm:flex-initial px-5 sm:px-6 py-2.5 rounded-full text-xs sm:text-sm font-bold flex items-center justify-center gap-2 text-slate-300">
+                    <span>💌</span>
+                    <span>Carta</span>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- 3. MAIN CONTENT -->
+    <main class="max-w-3xl mx-auto px-4 pt-6">
+
+        <!-- TAB 1: GIRASOLES -->
+        <section id="sec-flor" class="tab-content block h-[72vh] sm:h-[78vh] relative rounded-3xl overflow-hidden glass-panel border border-amber-500/20 p-4 sm:p-8">
+            
+            <canvas id="flowerCanvas" class="absolute inset-0 w-full h-full cursor-pointer z-0"></canvas>
+
+            <!-- Título Superior -->
+            <div class="relative z-10 text-center pointer-events-none mt-2">
+                <h2 class="font-handwriting text-3xl sm:text-5xl font-bold text-red-300 drop-shadow-md">
+                    ♥PARA DANIA♥
+                </h2>
+                <p class="text-xs sm:text-sm text-slate-300 mt-1 opacity-80 font-light">
+                    Toca las flores o cualquier parte de tu pantalla
+                </p>
+            </div>
+
+            <!-- Contador Anclado en la parte INFERIOR mediante CSS Absoluto -->
+            <div class="bottom-counter bg-slate-900/90 backdrop-blur-md border border-white/10 px-5 py-2.5 rounded-2xl flex items-center gap-3 text-xs sm:text-sm shadow-2xl pointer-events-none">
+                <span class="flex h-3 w-3 relative">
+                  <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-400 opacity-75"></span>
+                  <span class="relative inline-flex rounded-full h-3 w-3 bg-amber-500"></span>
+                </span>
+                <span class="text-slate-300 font-medium">Destellos de amor:</span>
+                <span id="clickCounter" class="font-code font-bold text-amber-400 bg-amber-400/20 px-2.5 py-0.5 rounded-lg border border-amber-400/30 text-sm">0</span>
+            </div>
+
+        </section>
+
+        <!-- TAB 2: CARTA -->
+        <section id="sec-carta" class="tab-content hidden min-h-[70vh] sm:min-h-[78vh]">
+            <div class="glass-panel rounded-3xl p-6 sm:p-10 border border-amber-500/20 shadow-2xl max-w-2xl mx-auto relative overflow-hidden">
+                
+                <div class="absolute -top-20 -right-20 w-56 h-56 bg-rose-500/15 rounded-full blur-3xl pointer-events-none"></div>
+                <div class="absolute -bottom-20 -left-20 w-56 h-56 bg-amber-500/15 rounded-full blur-3xl pointer-events-none"></div>
+
+                <div class="flex items-center justify-between border-b border-white/10 pb-4 mb-6 relative z-10">
+                    <div class="flex items-center gap-3">
+                        <span class="text-3xl">📜</span>
+                        <div>
+                            <h3 class="text-xl sm:text-2xl font-bold text-amber-300">Sincronía</h3>
+                            <p class="text-xs text-slate-400 font-code">De: Roninson 💻 ➔ Para: Dania, mi duende de navidad🧝</p>
+                        </div>
+                    </div>
+                    <span class="text-xs bg-amber-400/20 text-amber-300 px-3 py-1 rounded-full border border-amber-400/30 font-semibold hidden sm:inline">
+                        100% Sincronizados 💖
+                    </span>
+                </div>
+
+                <div class="font-handwriting text-xl sm:text-2xl leading-relaxed text-slate-200 space-y-5 relative z-10">
+                    <p>MI NIÑA...❤️🐼</p>
+                    <p>
+                        A veces me pongo a pensar en la universidad y en lo curioso que es el destino. Yo me paso los días entre monitores, líneas de código, algoritmos y lógica; mientras tú te formas con esa ternura, vocación y paciencia infinita para educar a los más pequeños.
+                    </p>
+                    
+                    <div class="bg-slate-950/80 p-4 rounded-2xl border border-amber-400/30 font-code text-xs sm:text-sm text-amber-300 space-y-1 shadow-inner my-3">
+                        <p class="text-slate-500">// El algoritmo de mi corazón</p>
+                        <p><span class="text-rose-400">while</span> (erestu) {</p>
+                        <p>&nbsp;&nbsp;&nbsp;&nbsp;miFelicidad = <span class="text-amber-400">Math.pow</span>(tuSonrisa, <span class="text-rose-400">Infinity</span>);</p>
+                        <p>&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-amber-400">crearAnécdotasInolvidables</span>();</p>
+                        <p>}</p>
+                    </div>
+
+                    <p>
+                        Si me pidieran programar el sistema más complejo del mundo, jamás podría igualar la magia que tú tienes para iluminarme el día con una sola sonrisa. Entre todas las historias y anécdotas que hemos vivido juntos, aprendí que no existe cálculo ni fórmula que pueda medir lo bonito que se siente tenerte cerca y abrazarte.
+                    </p>
+                    <p class="text-amber-300 font-bold text-2xl sm:text-3xl pt-2">
+                        ¡Ayer te robé un beso, descuida, que lo haré otra vez!❤️
+                    </p>
+                </div>
+
+                <div class="mt-8 pt-6 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4 relative z-10">
+                    <button onclick="triggerHeartBurst()" class="w-full sm:w-auto px-6 py-2.5 rounded-full bg-gradient-to-r from-rose-500 to-amber-500 text-slate-950 font-bold text-sm shadow-lg shadow-rose-500/20 hover:scale-105 active:scale-95 transition-all flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-heart"></i>
+                        <span>Enviarte un abrazo de oso virtual</span>
+                    </button>
+
+                    <div class="font-script text-3xl text-amber-300 text-center sm:text-right">
+                        De Roninson para ti...💕
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+    <!-- JAVASCRIPT LOGIC -->
+    <script>
+        function switchTab(tabId) {
+            document.querySelectorAll('.tab-content').forEach(sec => {
+                sec.classList.add('hidden');
+                sec.classList.remove('block');
+            });
+
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.remove('active', 'text-amber-300');
+                btn.classList.add('text-slate-300');
+            });
+
+            const targetSection = document.getElementById(`sec-${tabId}`);
+            const targetTabBtn = document.getElementById(`tab-${tabId}`);
+            
+            if (targetSection) {
+                targetSection.classList.remove('hidden');
+                targetSection.classList.add('block');
+            }
+            if (targetTabBtn) {
+                targetTabBtn.classList.add('active', 'text-amber-300');
+                targetTabBtn.classList.remove('text-slate-300');
+            }
+
+            if (tabId === 'flor') {
+                setTimeout(resizeCanvas, 50);
+            }
+        }
+
+        function startExperience() {
+            const overlay = document.getElementById('introOverlay');
+            overlay.classList.add('opacity-0', 'scale-105');
+            setTimeout(() => {
+                overlay.classList.add('hidden');
+            }, 700);
+
+            setTimeout(() => {
+                triggerCanvasBurst(displayWidth / 2, displayHeight / 2);
+            }, 300);
+        }
+
+        const canvas = document.getElementById('flowerCanvas');
+        const ctx = canvas.getContext('2d');
+
+        let particles = [];
+        let rings = [];
+        let clickCount = 0;
+        let displayWidth = 0;
+        let displayHeight = 0;
+
+        function resizeCanvas() {
+            if (!canvas.parentElement) return;
+            const dpr = window.devicePixelRatio || 1;
+            const rect = canvas.parentElement.getBoundingClientRect();
+            
+            displayWidth = rect.width;
+            displayHeight = rect.height;
+
+            canvas.width = rect.width * dpr;
+            canvas.height = rect.height * dpr;
+            ctx.scale(dpr, dpr);
+        }
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+
+        class ConcentricRing {
+            constructor(x, y, color) {
+                this.x = x;
+                this.y = y;
+                this.radius = 4;
+                this.alpha = 1;
+                this.color = color;
+                this.lineWidth = Math.random() * 3 + 2;
+            }
+            update() {
+                this.radius += 2.8;
+                this.alpha -= 0.022;
+            }
+            draw() {
+                if (this.alpha <= 0) return;
+                ctx.save();
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+                ctx.strokeStyle = this.color;
+                ctx.globalAlpha = Math.max(0, this.alpha);
+                ctx.lineWidth = this.lineWidth;
+                ctx.stroke();
+                ctx.restore();
+            }
+        }
+
+        class HeartParticle {
+            constructor(x, y) {
+                this.x = x;
+                this.y = y;
+                this.size = Math.random() * 14 + 10;
+                this.speedY = Math.random() * 2 + 1;
+                this.speedX = (Math.random() - 0.5) * 2;
+                this.alpha = 1;
+                this.color = Math.random() > 0.4 ? '#f43f5e' : (Math.random() > 0.5 ? '#facc15' : '#fb7185');
+            }
+            update() {
+                this.y -= this.speedY;
+                this.x += Math.sin(this.y * 0.04) * 1.2;
+                this.alpha -= 0.012;
+            }
+            draw() {
+                if (this.alpha <= 0) return;
+                ctx.save();
+                ctx.translate(this.x, this.y);
+                ctx.globalAlpha = Math.max(0, this.alpha);
+                ctx.fillStyle = this.color;
+                
+                ctx.beginPath();
+                const topCurve = this.size * 0.3;
+                ctx.moveTo(0, topCurve);
+                ctx.bezierCurveTo(0, 0, -this.size / 2, 0, -this.size / 2, topCurve);
+                ctx.bezierCurveTo(-this.size / 2, (this.size + topCurve) / 2, 0, this.size, 0, this.size);
+                ctx.bezierCurveTo(0, this.size, this.size / 2, (this.size + topCurve) / 2, this.size / 2, topCurve);
+                ctx.bezierCurveTo(this.size / 2, 0, 0, 0, 0, topCurve);
+                ctx.fill();
+                ctx.restore();
+            }
+        }
+
+        function drawYellowFlowers() {
+            const centerX = displayWidth / 2;
+            // Los girasoles se dibujan justo encima de la barra del contador
+            const bottomY = displayHeight - 55;
+
+            const scaleFactor = Math.min(displayWidth / 450, 1);
+            const spacing = Math.min(displayWidth * 0.25, 110);
+
+            const flowers = [
+                { x: centerX, y: bottomY - (160 * scaleFactor), scale: 1.0 * scaleFactor },
+                { x: centerX - spacing, y: bottomY - (120 * scaleFactor), scale: 0.75 * scaleFactor },
+                { x: centerX + spacing, y: bottomY - (125 * scaleFactor), scale: 0.8 * scaleFactor }
+            ];
+
+            flowers.forEach(f => {
+                ctx.save();
+                ctx.translate(f.x, f.y);
+                ctx.scale(f.scale, f.scale);
+
+                const stemLength = (bottomY - f.y) / f.scale;
+                ctx.beginPath();
+                ctx.moveTo(0, 0);
+                ctx.quadraticCurveTo(-12, stemLength / 2, 0, stemLength);
+                ctx.strokeStyle = '#15803d';
+                ctx.lineWidth = 8;
+                ctx.stroke();
+
+                ctx.fillStyle = '#22c55e';
+                ctx.beginPath();
+                ctx.ellipse(-28, 55, 22, 9, -Math.PI / 4, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.beginPath();
+                ctx.ellipse(28, 45, 22, 9, Math.PI / 4, 0, Math.PI * 2);
+                ctx.fill();
+
+                for (let i = 0; i < 8; i++) {
+                    ctx.save();
+                    ctx.rotate((i * Math.PI) / 4);
+                    
+                    const gradient = ctx.createLinearGradient(0, 0, 0, -45);
+                    gradient.addColorStop(0, '#eab308');
+                    gradient.addColorStop(0.6, '#facc15');
+                    gradient.addColorStop(1, '#fef08a');
+
+                    ctx.fillStyle = gradient;
+                    ctx.beginPath();
+                    ctx.ellipse(0, -25, 13, 25, 0, 0, Math.PI * 2);
+                    ctx.fill();
+                    ctx.restore();
+                }
+
+                ctx.beginPath();
+                ctx.arc(0, 0, 16, 0, Math.PI * 2);
+                ctx.fillStyle = '#713f12';
+                ctx.fill();
+                ctx.strokeStyle = '#fde047';
+                ctx.lineWidth = 2;
+                ctx.stroke();
+
+                ctx.restore();
+            });
+        }
+
+        function triggerCanvasBurst(x, y) {
+            rings.push(new ConcentricRing(x, y, '#22c55e'));
+            rings.push(new ConcentricRing(x, y, '#facc15'));
+            rings.push(new ConcentricRing(x, y, '#f43f5e'));
+
+            for (let i = 0; i < 14; i++) {
+                particles.push(new HeartParticle(x + (Math.random() - 0.5) * 50, y + (Math.random() - 0.5) * 50));
+            }
+
+            clickCount++;
+            document.getElementById('clickCounter').innerText = clickCount;
+
+            playChimeSound();
+        }
+
+        canvas.addEventListener('click', (e) => {
+            const rect = canvas.getBoundingClientRect();
+            triggerCanvasBurst(e.clientX - rect.left, e.clientY - rect.top);
+        });
+
+        function renderCanvas() {
+            ctx.clearRect(0, 0, displayWidth, displayHeight);
+
+            drawYellowFlowers();
+
+            for (let i = rings.length - 1; i >= 0; i--) {
+                rings[i].update();
+                rings[i].draw();
+                if (rings[i].alpha <= 0) rings.splice(i, 1);
+            }
+
+            for (let i = particles.length - 1; i >= 0; i--) {
+                particles[i].update();
+                particles[i].draw();
+                if (particles[i].alpha <= 0) particles.splice(i, 1);
+            }
+
+            requestAnimationFrame(renderCanvas);
+        }
+        renderCanvas();
+
+        function triggerHeartBurst() {
+            switchTab('flor');
+            const centerX = displayWidth / 2;
+            const centerY = displayHeight / 2;
+            for(let i = 0; i < 3; i++) {
+                setTimeout(() => {
+                    triggerCanvasBurst(centerX + (Math.random() - 0.5) * 150, centerY + (Math.random() - 0.5) * 150);
+                }, i * 200);
+            }
+        }
+
+        function playChimeSound() {
+            try {
+                const AudioContext = window.AudioContext || window.webkitAudioContext;
+                if (!AudioContext) return;
+                const audioCtx = new AudioContext();
+                
+                const freqs = [523.25, 659.25, 783.99, 1046.50];
+                freqs.forEach((f, i) => {
+                    const osc = audioCtx.createOscillator();
+                    const gain = audioCtx.createGain();
+                    osc.type = 'sine';
+                    osc.frequency.value = f;
+                    
+                    gain.gain.setValueAtTime(0.04, audioCtx.currentTime + i * 0.04);
+                    gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + i * 0.04 + 0.35);
+                    
+                    osc.connect(gain);
+                    gain.connect(audioCtx.destination);
+                    osc.start(audioCtx.currentTime + i * 0.04);
+                    osc.stop(audioCtx.currentTime + i * 0.04 + 0.35);
+                });
+            } catch(e){}
+        }
+    </script>
+</body>
+</html>
